@@ -38,7 +38,16 @@ public class GameState {
 		
 	}
 	
+	public char [][] getBoard(){
+		return this.board;
+	}
 	
+	public void setBoard(int x, int y, char player){
+		if( player=='a')
+			this.board[x][y] = PLAYER1;
+		else if( player=='b')
+			this.board[x][y] = PLAYER2;
+	}
 	
 	
 }

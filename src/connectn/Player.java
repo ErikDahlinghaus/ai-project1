@@ -29,12 +29,17 @@ public class Player {
         timeLimit = Integer.parseInt(gameConfig[4]);
 
         
-        GameState state = new GameState(1,1,1);
+        GameState state = new GameState(height,width,numToWin);
         
         
-        int currentTurn = 0;	// first player starts
+        boolean currentTurn = false;	// first player starts
+        if(playerNumber==1)
+        	currentTurn=true;
+        else if(playerNumber==2)
+        	currentTurn=false;
+        
         while (true) {
-            if (currentTurn == playerNumber) {
+            if (currentTurn) {
                 // TODO: use a mechanism for timeout(threads, java.util.Timer, ..)
             	
             	// test
@@ -55,7 +60,7 @@ public class Player {
             }
 
             // switch turns
-            currentTurn = 1 - currentTurn;
+            currentTurn = !currentTurn;
         }
     }
     
