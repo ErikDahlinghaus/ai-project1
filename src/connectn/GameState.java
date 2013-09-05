@@ -2,14 +2,12 @@ package connectn;
 
 import java.io.*;
 
-public class GameState {
+public class GameState implements Constants {
 	
 	
 	int N=4;
 	
-	char NO_PLAYER = 'x';
-	char PLAYER1 = 'a';
-	char PLAYER2 = 'b';
+
 	
 	int height;
 	int width;
@@ -36,6 +34,16 @@ public class GameState {
 			}
 		}
 		
+	}
+	
+	public void playMove(int column, int type, char player){
+		// Update game board, place piece in the proper column.
+		int i;
+		for( i=0; i<height; i++ ){
+			if( this.board[i][column] != NO_PLAYER ){
+				this.board[i-1][column] = player;
+			}
+		}
 	}
 	
 	

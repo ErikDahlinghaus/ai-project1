@@ -3,11 +3,10 @@ package connectn;
 
 import java.io.*;
 
-public class Player {
+public class Player implements Constants {
 
-    public static void main (String args[]) throws Exception {
+    public static void main (String args[]) throws Exception {    	
     	
-    	String PLAYER_NAME="edahling-x";
     	
         int width, height, numToWin, playerNumber, timeLimit, move;
 
@@ -37,17 +36,22 @@ public class Player {
             if (currentTurn == playerNumber) {
                 // TODO: use a mechanism for timeout(threads, java.util.Timer, ..)
             	
-            	// test
+            	/*
+            	 * Decide on move to make (getMove(GameState))
+            	 * Send move to ref (println(move))
+            	 */
 
                 // call alpha-beta algorithm to get the move
                 //move = getMove();
 
                 // send move
                 //System.out.println(String.valueOf(move));
-                //System.out.flush();
+            	
             } else {
                 // read move
                 move = Integer.parseInt(input.readLine());
+                
+                // Update gamestate GameState.playMove(move);
 
                 // check for end
                 if (move < 0)
