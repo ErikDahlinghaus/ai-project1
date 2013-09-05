@@ -36,6 +36,20 @@ public class GameState implements Constants {
 		
 	}
 	
+
+	public char [][] getBoard(){
+		return this.board;
+	}
+	
+	
+	// setBoard and playMove are the same really, decide which one is better.
+	public void setBoard(int x, int y, char player){
+		if( player=='a')
+			this.board[x][y] = PLAYER1;
+		else if( player=='b')
+			this.board[x][y] = PLAYER2;
+	}
+	
 	public void playMove(int column, int type, char player){
 		// Update game board, place piece in the proper column.
 		int i;
@@ -46,7 +60,5 @@ public class GameState implements Constants {
 		}
 	}
 	
-	
-	
-	
+
 }
