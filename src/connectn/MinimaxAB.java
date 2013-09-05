@@ -12,8 +12,13 @@ public class MinimaxAB implements Constants {
 		int[] move = new int[2];
 		
 		// Know about N (connect N)
+
+		/*
+		 * 
+		 */
 		
-		
+		move[0] = (int )(Math.random() * state.width + 1);
+		move[1] = DROP;
 		
 		return move;
 		

@@ -21,7 +21,7 @@ public class GameState implements Constants {
 		this.width = width;
 		this.N = N;
 		
-		board = new Board(height, width);
+		board = new Board(this.height, this.width);
 	}
 
 

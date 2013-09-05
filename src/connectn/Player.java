@@ -26,6 +26,9 @@ public class Player implements Constants {
         numToWin = Integer.parseInt(gameConfig[2]);
         playerNumber = Integer.parseInt(gameConfig[3]);
         timeLimit = Integer.parseInt(gameConfig[4]);
+        
+        
+        System.err.printf("H: %d W: %d N: %d PN: %d TL: %d\n", height, width, numToWin, playerNumber, timeLimit);
 
         
         GameState state = new GameState(height, width, numToWin);
