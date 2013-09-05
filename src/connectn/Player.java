@@ -54,13 +54,18 @@ public class Player implements Constants {
             	
             } else {
                 // read move
-                move = Integer.parseInt(input.readLine());
-                
+                // move = Integer.parseInt(input.readLine());
+            	String [] opponentMove = input.readLine().split(" ");
+            	
+            	int column = Integer.parseInt(opponentMove[0]);
+            	int moveType = Integer.parseInt(opponentMove[1]);
+            	
                 // Update gamestate GameState.playMove(move);
+            	state.board.playMove(column,moveType,Constants.PLAYER2);
 
                 // check for end
-                if (move < 0)
-                    break;
+                //if (move < 0)
+                //    break;
             }
 
             // switch turns

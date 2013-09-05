@@ -25,6 +25,5 @@ public class GameState implements Constants {
 	public Board getBoard(){
 		return this.board;
 	}
-	
 
 }
