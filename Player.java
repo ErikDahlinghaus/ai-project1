@@ -25,6 +25,8 @@ public class Player {
         while (true) {
             if (currentTurn == myTurn) {
                 // TODO: use a mechanism for timeout(threads, java.util.Timer, ..)
+            	
+            	// test
 
                 // call alpha-beta algorithm to get the move
                 move = getMove();
