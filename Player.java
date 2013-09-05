@@ -3,14 +3,18 @@ import java.io.*;
 public class Player {
 
     public static void main (String args[]) throws Exception {
+    	
+    	static String PLAYER_NAME="edahling-x";
+    	
         int width, height, numToWin, playerNumber, timeLimit, move;
 
+        
         // use BufferedReader for easy reading
         BufferedReader input = new BufferedReader(
             new InputStreamReader(System.in));
 
         // send player name
-        System.out.println("player");
+        System.out.println(PLAYER_NAME);
         System.out.flush();
 
         // read game config
@@ -21,6 +25,10 @@ public class Player {
         playerNumber = Integer.parseInt(gameConfig[3]);
         timeLimit = Integer.parseInt(gameConfig[4]);
 
+        
+        GameState state = new GameState
+        
+        
         int currentTurn = 0;	// first player starts
         while (true) {
             if (currentTurn == myTurn) {
