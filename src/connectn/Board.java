@@ -31,13 +31,34 @@ public class Board implements Constants {
 		// Update game board, place piece in the proper column.
 		int i;
 		
+		switch(type){
 		
-		
-		for( i=0; i<height; i++ ){
-			if( this.board[i][column] != NO_PLAYER ){
-				this.board[i-1][column] = player;
+		case DROP:
+			for( i=0; i<height; i++ ){
+				if( this.board[height][column] != NO_PLAYER ){
+					// invalid move
+					return;
+				}
+				if( this.board[i][column] == NO_PLAYER ){
+					this.board[i][column] = player;
+				}
 			}
+			break;
+			
+		case POP:
+			if( this.board[0][column] == player ){
+				for( i=0; i<height-1; i++ ){
+					this.board[i][column] = this.board[i+1][column];
+				}
+				this.board[height][column] = NO_PLAYER;
+			} else {
+				// this is not a valid move
+			}
+			break;
+		
 		}
+		
+
 	
 	
 	}

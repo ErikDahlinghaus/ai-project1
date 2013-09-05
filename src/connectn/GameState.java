@@ -6,6 +6,9 @@ public class GameState implements Constants {
 	
 	
 	int N=4;
+	int depth = DEPTH;
+	
+	
 	int height;
 	int width;
 	Board board;

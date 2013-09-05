@@ -8,8 +8,8 @@ public class Player implements Constants {
     public static void main (String args[]) throws Exception {    	
     	
     	
-        int width, height, numToWin, playerNumber, timeLimit, move;
-
+        int width, height, numToWin, playerNumber, timeLimit;
+        int[] move = new int[2];
         
         // use BufferedReader for easy reading
         BufferedReader input = new BufferedReader(
@@ -28,7 +28,7 @@ public class Player implements Constants {
         timeLimit = Integer.parseInt(gameConfig[4]);
 
         
-        GameState state = new GameState(height,width,numToWin);
+        GameState state = new GameState(height, width, numToWin);
         
         
         boolean currentTurn = false;	// first player starts
@@ -40,32 +40,40 @@ public class Player implements Constants {
         while (true) {
             if (currentTurn) {
                 // TODO: use a mechanism for timeout(threads, java.util.Timer, ..)
-            	
+
             	/*
-            	 * Decide on move to make (getMove(GameState))
-            	 * Send move to ref (println(move))
+            	 * Start a timer (timeLimit seconds)
+            	 * n-1 seconds return something right the fuck now
             	 */
 
                 // call alpha-beta algorithm to get the move
-                //move = getMove();
+                move = MinimaxAB.getMove(state);
+                
+                
+                
+                // Update our game state
+                state.board.playMove(move[0], move[1], PLAYER1);
 
-                // send move
-                //System.out.println(String.valueOf(move));
+                
+                
+                // Send move
+                String movetosend = move[0]+" "+move[1];
+                System.out.println(movetosend);
+                System.out.flush();
             	
             } else {
                 // read move
-                // move = Integer.parseInt(input.readLine());
             	String [] opponentMove = input.readLine().split(" ");
             	
             	int column = Integer.parseInt(opponentMove[0]);
+            	if(column < 0 ){
+            		// There was a winner
+            		break;
+            	}
             	int moveType = Integer.parseInt(opponentMove[1]);
             	
-                // Update gamestate GameState.playMove(move);
-            	state.board.playMove(column,moveType,Constants.PLAYER2);
-
-                // check for end
-                //if (move < 0)
-                //    break;
+                // Update our game state
+            	state.board.playMove(column, moveType, PLAYER2);
             }
 
             // switch turns

@@ -6,5 +6,10 @@ public interface Constants {
 	char NO_PLAYER = 'x';
 	char PLAYER1 = 'a';
 	char PLAYER2 = 'b';
+	
+	int DEPTH = 3;
+	
+	int DROP = 1;
+	int POP = 2;
 
 }
