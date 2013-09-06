@@ -7,7 +7,7 @@ public class GameState implements Constants {
 	
 	int N=4;
 	int depth = DEPTH;
-	
+	Move lastMove;
 	
 	int rows;
 	int cols;
@@ -60,6 +60,7 @@ public class GameState implements Constants {
 		
 		logger.log("Attempting to play move... Column: %d Type: %d Player: %c",column, type, player);
 		
+		this.lastMove = new Move(column, type, player, 0);
 		
 		switch(type){
 		

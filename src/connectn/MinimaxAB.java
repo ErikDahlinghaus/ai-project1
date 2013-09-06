@@ -12,18 +12,19 @@ public class MinimaxAB implements Constants {
 
 	}
 
-	public Move chooseBestMove(GameState state, int depth, int alpha, int beta, char currentPlayer) {
-		Move bestMove;
+	// Change these variables
+	public Move chooseBestMove(GameState state, int depth, int alpha, int beta, char currentPlayer) throws Exception {
+		Move bestMove = null;
 		
-		int highestValue;
+		int highestValue = 0;
 		
 		for (int i = 0; i < state.cols; i++) {
 			for (int j = DROP; j < POP; j++) {
 				GameState child = state.copy();
-				child.makeMove(somemove)
-				int value = alphaBetaPruning();
-				if value > highest value
-					bestMove = child.lastmove
+				child.playMove(0,0,currentPlayer); // some move
+				int value = alphaBetaPruning(child, DEPTH, alpha, beta, currentPlayer);
+				if ( value > highestValue )
+					bestMove = child.lastMove;
 			}
 		}
 		
