@@ -78,7 +78,7 @@ public class Player implements Constants {
                 
                
                 // Update our game state
-                state.board.playMove(move[0], move[1], PLAYER1);
+                state.playMove(move[0], move[1], PLAYER1);
 
                 
                 // Send move
@@ -108,7 +108,7 @@ public class Player implements Constants {
             	logger.log("Opponent move: "+column+" "+moveType);
             	
                 // Update our game state
-            	state.board.playMove(column, moveType, PLAYER2);
+            	state.playMove(column, moveType, PLAYER2);
             	
             	logger.log("Got to the end of opponents move");
             }

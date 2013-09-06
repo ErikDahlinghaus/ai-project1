@@ -13,199 +13,129 @@ public class MinimaxAB implements Constants {
 		
 		// Know about N (connect N)
 
-		/*
-		 * 
-		 */
-		
-		
-		Board child = state.board.copy();
-		
-		
-		move[0] = (int )(Math.random() * state.width-1 + 1);
+		move[0] = (int )(Math.random() * state.cols-1 + 1);
 		move[1] = DROP;
 		
 		return move;
 		
 	}
 	
-//	  public int checkHorizontally(){
-//		  int max1=0;
-//			 int max2=0;
-//			 boolean player1_win=false;
-//			 boolean player2_win=false;
-//			 //check each row, horizontally
-//			 for(int i=0;i<this.height;i++){
-//				 max1=0;
-//				 max2=0;
-//				for(int j=0;j<this.width;j++){
-//					if(board[i][j]==PLAYER1){
-//						max1++;
-//						max2=0;
-//						if(max1==N)
-//							 player1_win=true;
-//					}
-//					else if(board[i][j]==PLAYER2){
-//						max1=0;
-//						max2++;
-//						if(max2==N)
-//							 player2_win=true;
-//					}
-//					else{
-//						max1=0;
-//						max2=0;
-//					}
-//				}
-//			 } 
-//			 if (player1_win && player2_win)
-//				 return this.TIE;
-//			 if (player1_win)
-//				 return this.PLAYER1;
-//			 if (player2_win)
-//				 return this.PLAYER2;
-//			 
-//			 return this.NOCONNECTION;
-//	  }
-//
-//	  public int checkVertically(){
-//		  //check each column, vertically
-//		  int max1=0;
-//		  int max2=0;
-//		  boolean player1_win=false;
-//		  boolean player2_win=false;
-//			 
-//			 for(int j=0;j<this.width;j++){
-//				 max1=0;
-//				 max2=0;
-//				for(int i=0;i<this.height;i++){
-//					if(board[i][j]==PLAYER1){
-//						max1++;
-//						max2=0;
-//						if(max1==N)
-//							 player1_win=true;
-//					}
-//					else if(board[i][j]==PLAYER2){
-//						max1=0;
-//						max2++;
-//						if(max2==N)
-//							player2_win=true;
-//					}
-//					else{
-//						max1=0;
-//						max2=0;
-//					}
-//				}
-//			 } 
-//			 if (player1_win && player2_win)
-//				 return this.TIE;
-//			 if (player1_win)
-//				 return this.PLAYER1;
-//			 if (player2_win)
-//				 return this.PLAYER2;
-//			 
-//			 return this.NOCONNECTION;
-//	  }
-//	  
-//	   public int checkDiagonally1(){
-//		 //check diagonally y=-x+k
-//		   int max1=0;
-//		   int max2=0;
-//		   boolean player1_win=false;
-//		   boolean player2_win=false;
-//		   int upper_bound=height-1+width-1-(N-1);
-//		   
-//			 for(int k=N-1;k<=upper_bound;k++){			
-//				 max1=0;
-//				 max2=0;
-//				 int x,y;
-//				 if(k<width) 
-//					 x=k;
-//				 else
-//					 x=width-1;
-//				 y=-x+k;
-//				 
-//				while(x>=0  && y<height){
-//					// System.out.println("k: "+k+", x: "+x+", y: "+y);
-//					if(board[height-1-y][x]==PLAYER1){
-//						max1++;
-//						max2=0;
-//						if(max1==N)
-//							 player1_win=true;
-//					}
-//					else if(board[height-1-y][x]==PLAYER2){
-//						max1=0;
-//						max2++;
-//						if(max2==N)
-//							player2_win=true;
-//					}
-//					else{
-//						max1=0;
-//						max2=0;
-//					}
-//					x--;
-//					y++;
-//				}	 
-//				 
-//			 }
-//			 if (player1_win && player2_win)
-//				 return this.TIE;
-//			 if (player1_win)
-//				 return this.PLAYER1;
-//			 if (player2_win)
-//				 return this.PLAYER2;
-//			 
-//			 return this.NOCONNECTION;
-//	   }
-//		 
-//	   public int checkDiagonally2(){
-//		 //check diagonally y=x-k
-//		   int max1=0;
-//		   int max2=0;
-//		   boolean player1_win=false;
-//		   boolean player2_win=false;
-//		   int upper_bound=width-1-(N-1);
-//		   int  lower_bound=-(height-1-(N-1));
-//		  // System.out.println("lower: "+lower_bound+", upper_bound: "+upper_bound);
-//			 for(int k=lower_bound;k<=upper_bound;k++){			
-//				 max1=0;
-//				 max2=0;
-//				 int x,y;
-//				 if(k>=0) 
-//					 x=k;
-//				 else
-//					 x=0;
-//				 y=x-k;
-//				while(x>=0 && x<width && y<height){
-//					// System.out.println("k: "+k+", x: "+x+", y: "+y);
-//					if(board[height-1-y][x]==PLAYER1){
-//						max1++;
-//						max2=0;
-//						if(max1==N)
-//							 player1_win=true;
-//					}
-//					else if(board[height-1-y][x]==PLAYER2){
-//						max1=0;
-//						max2++;
-//						if(max2==N)
-//							player2_win=true;
-//					}
-//					else{
-//						max1=0;
-//						max2=0;
-//					}
-//					x++;
-//					y++;
-//				}	 
-//				 
-//			 }	 //end for y=x-k
-//			 
-//			 if (player1_win && player2_win)
-//				 return this.TIE;
-//			 if (player1_win)
-//				 return this.PLAYER1;
-//			 if (player2_win)
-//				 return this.PLAYER2;
-//			 
-//			 return this.NOCONNECTION;
-//	   }
 
+	
+	public int heuristicValue(GameState state, char player)
+	{
+		/*
+		 * Simple heuristic to evaluate board configurations
+         * Heuristic is:
+         * winning-streaks*weight(wins) +
+         * winning-1-streaks*weight(winning-1) +
+         * winning-2-streaks*weight(winning-2) -
+         * opposing-winning-2-streaks*weight(winning-2-threat) -
+         * opposing-winning-1-streaks*weight(winning-2-threat) -
+         * opposing-winning-streaks*weight(winning-threat)
+		 */
+		
+		char oppositePlayer = (player == PLAYER1) ? PLAYER2 : PLAYER1;
+		
+		int value = 0;
+		
+		value += WEIGHTS[WINS] * checkForStreak(state, player, state.N);
+		value += WEIGHTS[N_STREAK] * checkForStreak(state, player, state.N-1);
+		value += WEIGHTS[N_LESS_STREAK] * checkForStreak(state, player, state.N-2);
+		value -= WEIGHTS[N_LESS_STREAK_THREATS] * checkForStreak(state, oppositePlayer, state.N-2);		
+		value -= WEIGHTS[N_STREAK_THREATS] * checkForStreak(state, oppositePlayer, state.N-1);
+		value -= WEIGHTS[WIN_THREATS] * checkForStreak(state, oppositePlayer, state.N);
+
+		return value;
+	}
+	
+	
+	private int checkForStreak(GameState state, char player, int streak){
+		
+		int count = 0;
+		int row, col;
+		
+		for( row=0; row<state.rows; row++ ){
+			for( col=0; col<state.cols; col++ ){
+				if( state.board[row][col] == player ){
+					count += verticalStreak(state, row, col, streak);
+					count += horizonalStreak(state, row, col, streak);
+					count += diagonalStreak(state, row, col, streak);
+				}
+			}
+		}
+		return count;
+	}
+
+	
+	
+	private int verticalStreak(GameState state, int r, int c, int streak ){
+		int count = 0;
+		
+		int row;
+		for( row=r; row<state.rows; row++ ){
+			if( state.board[row][state.cols-1] == state.board[r][c] ){
+				count++;
+			} else {
+				break;
+			}
+		}
+		return (count > streak) ? 1 : 0 ;	
+	}
+	
+	private int horizonalStreak(GameState state, int r, int c, int streak ){
+		int count = 0;
+		
+		int col;
+		for( col=c; col<state.cols; col++ ){
+			if( state.board[state.rows-1][col] == state.board[r][c] ){
+				count++;
+			} else {
+				break;
+			}
+		}
+		return (count > streak) ? 1 : 0 ;	
+	}
+	
+	private int diagonalStreak(GameState state, int r, int c, int streak ){
+		int total = 0;
+		int count = 0;
+		
+		int row = r;
+		int col = c;
+		for( col=c; col<state.cols; col++ ){
+			if( row < state.rows ){
+				if( state.board[row][col] == state.board[r][c] ){
+					count++;
+				} else {
+					break;
+				}
+				row++;
+			}
+		}
+		total += (count > streak) ? 1 : 0 ;	
+		
+		count = 0;
+		row = r;
+		col = c;
+		for( col=c; col<state.cols; col++ ){
+			if( row >= 0 ){
+				if( state.board[row][col] == state.board[r][c] ){
+					count++;
+				} else {
+					break;
+				}
+				row--;
+			}
+		}
+		total += (count > streak) ? 1 : 0 ;	
+
+		return total;		
+	}
+	
+	
+	
+	
+	
+	
 }
