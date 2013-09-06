@@ -91,6 +91,10 @@ public class GameState implements Constants {
 		
 		}
 		
+		if ( isValid ){
+			this.printBoard();
+		}
+		
 		return isValid;
 	}
 
