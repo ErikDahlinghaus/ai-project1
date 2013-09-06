@@ -4,35 +4,38 @@ import java.math.*;
 
 public class MinimaxAB implements Constants {
 
-	// best move at each depth of the tree
-	Move[] bestMoves = null;
-	int depth = 0;
+	Move bestMove;
 	
-	MinimaxAB(){
-
-	}
+	MinimaxAB(){}
 
 	// Change these variables
-	public Move chooseBestMove(GameState state, int depth, int alpha, int beta, char currentPlayer) throws Exception {
-		Move bestMove = null;
+	public Move chooseBestMove(GameState state) throws Exception {
+		
+		char currentPlayer = PLAYER1;
+		int alpha = Integer.MIN_VALUE;	
+		int beta = Integer.MAX_VALUE;
 		
 		int highestValue = 0;
 		
-		for (int i = 0; i < state.cols; i++) {
-			for (int j = DROP; j < POP; j++) {
+		for (int col = 0; col < state.cols; col++) {
+			for (int type = DROP; type <= POP; type++) {
 				GameState child = state.copy();
-				child.playMove(0,0,currentPlayer); // some move
+				child.playMove(col,type,currentPlayer);
 				int value = alphaBetaPruning(child, DEPTH, alpha, beta, currentPlayer);
-				if ( value > highestValue )
-					bestMove = child.lastMove;
+				if ( value > highestValue ){
+					logger.log("Highest Value: %d Last Value: %d",highestValue, value);
+					// Not sure < >
+					this.bestMove = child.lastMove;
+					highestValue = value;
+				}
 			}
 		}
 		
-		return bestMove;
+		return this.bestMove;
 	}
 	
 	public int alphaBetaPruning(GameState state, int depth, int alpha, int beta, char currentPlayer) throws Exception {
-		if (depth == DEPTH)
+		if (depth == DEPTH) // Check for winning condition
 			return heuristicValue(state, currentPlayer);
 		
 		if (currentPlayer == PLAYER1) {

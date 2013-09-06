@@ -16,10 +16,10 @@ public class Player implements Constants {
     	} catch( Exception e ){}
     	
         int width, height, numToWin, playerNumber, timeLimit;
-        int[] move = new int[2];
         
         // use BufferedReader for easy reading
         BufferedReader input = new BufferedReader(new InputStreamReader(System.in));
+    	MinimaxAB alg = new MinimaxAB();
 
         // send player name
         System.out.println(player_name);
@@ -71,14 +71,24 @@ public class Player implements Constants {
             	logger.log("I'm going to play a move");
             	
                 // call alpha-beta algorithm to get the move
-                move = MinimaxAB.getMove(state);
-                String movetosend = move[0]+" "+move[1];
+                //move = 
+            	
+
+            	
+            	Move bestMove = alg.chooseBestMove(state);
                 
+                
+                // Instantiate the MinimaxAB class
+                // Tell it to find a move (store the move in a class wide variable)
+                // When the time runs out grab the best move (so far) and use it
+                
+                
+                String movetosend = bestMove.column+" "+bestMove.moveType;                
                 logger.log(String.format("Move to send is: %s", movetosend));
                 
                
                 // Update our game state
-                state.playMove(move[0], move[1], PLAYER1);
+                state.playMove(bestMove.column, bestMove.moveType, PLAYER1);
 
                 
                 // Send move
