@@ -17,7 +17,11 @@ public class MinimaxAB implements Constants {
 		 * 
 		 */
 		
-		move[0] = (int )(Math.random() * state.width + 1);
+		
+		Board child = state.board.copy();
+		
+		
+		move[0] = (int )(Math.random() * state.width-1 + 1);
 		move[1] = DROP;
 		
 		return move;

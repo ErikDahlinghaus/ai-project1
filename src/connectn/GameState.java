@@ -28,5 +28,24 @@ public class GameState implements Constants {
 	public Board getBoard(){
 		return this.board;
 	}
+	
+	public void printBoard() throws IOException{
+		int c,r;
+		
+		
+		logger.log("\n------ Board ------");
+		for( r=0; r < this.height; r++){
+			String row = "|";
+			for( c=0; c < this.width; c++){
+				row = row+" "+this.board.board[r][c]+" |";
+			}
+			logger.log(row);
+		}
+		logger.log("------ ----- ------\n");
+
+	}
+		
+		
+	
 
 }

@@ -24,7 +24,7 @@ public class Board implements Constants {
 		int i,j;
 		board = new char[this.height][this.width];
 		
-        System.err.printf("H: %d W: %d\n", this.height, this.width);
+//        System.err.printf("H: %d W: %d\n", this.height, this.width);
 		
 		for( i=0; i<this.height; i++ ){
 			for( j=0; j<this.width; j++ ){
@@ -48,39 +48,52 @@ public class Board implements Constants {
 		return newboard;
 	}
 	
-	public void playMove(int column, int type, char player){
+	public boolean playMove(int column, int type, char player)  throws Exception {
 		// Update game board, place piece in the proper column.
 		int i;
+		boolean isValid = true;
+		
+		logger.log("Attempting to play move... Column: %d Type: %d Player: %c",column, type, player);
+		
 		
 		switch(type){
 		
 		case DROP:
-			for( i=this.height-1; i>0; i-- ){
-				if( this.board[0][column-1] != NO_PLAYER ){
-					System.err.println("You can't play here, column is full...");
-					return;
+			for( i=this.height-1; i>=0; i-- ){
+				if( this.board[0][column] != NO_PLAYER ){
+//					System.err.println("You can't play here, column is full...");
+					isValid = false;
+					return isValid;
 				}
-				if( this.board[i][column-1] == NO_PLAYER ){
-					this.board[i][column-1] = player;
+				if( this.board[i][column] == NO_PLAYER ){
+					this.board[i][column] = player;
+					break;
 				}
 			}
+			
+//			for( i=0; i < this.height; i++){
+//				for( int j=0; j < this.width; j++){
+//					System.err.print(this.board[i][j]);
+//				}
+//				System.err.println("\n");
+//			}
 			break;
 			
 		case POP:
-			if( this.board[this.height-1][column-1] == player ){
+			if( this.board[this.height-1][column] == player ){
 				for( i=this.height-1; i>0; i-- ){
-					// Out of bounds?
-					//this.board[i][column-1] = this.board[i+1][column-1];
+					this.board[i][column] = this.board[i-1][column];
 				}
-				this.board[0][column-1] = NO_PLAYER;
+				this.board[0][column] = NO_PLAYER;
 			} else {
-				// this is not a valid move
+				isValid = false;
+				return isValid;
 			}
 			break;
 		
 		}
 		
-
+		return isValid;
 	
 	
 	}
