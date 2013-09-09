@@ -58,7 +58,7 @@ public class GameState implements Constants {
 		int i, row;
 		boolean isValid = true;
 		
-		logger.log("Attempting to play move... Column: %d Type: %d Player: %c",column, type, player);
+		//logger.log("Attempting to play move... Column: %d Type: %d Player: %c",column, type, player);
 		
 		this.lastMove = new Move(column, type, player, 0);
 		
@@ -83,7 +83,7 @@ public class GameState implements Constants {
 				for( i=this.rows-1; i>0; i-- ){
 					this.board[i][column] = this.board[i-1][column];
 				}
-				this.board[this.rows-1][column] = NO_PLAYER;
+				this.board[0][column] = NO_PLAYER;
 			} else {
 				return isValid = false;
 			}
@@ -99,7 +99,7 @@ public class GameState implements Constants {
 	}
 	
 	public boolean columnIsFull(int column){
-		if( this.board[this.rows-1][column] == NO_PLAYER ){
+		if( this.board[0][column] == NO_PLAYER ){
 			return false;
 		} else {
 			return true;
@@ -120,6 +120,22 @@ public class GameState implements Constants {
 			logger.log(row);
 		}
 		logger.log("------ ----- ------\n");
+
+	}
+	
+	public void printBoard(Logger _logger) throws IOException{
+		int c,r;
+		
+		
+		_logger.log("\n------ Board ------");
+		for( r=0; r < this.rows; r++){
+			String row = "|";
+			for( c=0; c < this.cols; c++){
+				row = row+" "+this.board[r][c]+" |";
+			}
+			_logger.log(row);
+		}
+		_logger.log("------ ----- ------\n");
 
 	}
 		

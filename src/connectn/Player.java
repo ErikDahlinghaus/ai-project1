@@ -10,6 +10,12 @@ public class Player implements Constants {
     	String player_name = PLAYER_NAME;
     	
     	try{
+    		if(args[0].contains("debug") || args[0].contains("test")){
+    			System.err.println("Debugging mode");
+    			Test.runTests();
+    			System.err.println("Done debugging mode");
+    			System.exit(0);
+    		}
     		player_name = args[0];
     	} catch( Exception e ){}
     	

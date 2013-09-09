@@ -124,13 +124,13 @@ public class MinimaxAB implements Constants {
 		value -= WEIGHTS[N_STREAK_THREATS] * checkForStreak(state, oppositePlayer, state.N-1);
 //		logger.log("5 Value of Heuristic: %d", value);
 		value -= WEIGHTS[WIN_THREATS] * checkForStreak(state, oppositePlayer, state.N);
-		logger.log("6 Value of Heuristic: %d", value);
+//		logger.log("6 Value of Heuristic: %d", value);
 
 		return value;
 	}
 	
 	
-	private int checkForStreak(GameState state, char player, int streak){
+	public int checkForStreak(GameState state, char player, int streak){
 		
 		int count = 0;
 		int row, col;
@@ -149,7 +149,7 @@ public class MinimaxAB implements Constants {
 
 	
 	
-	private int verticalStreak(GameState state, int r, int c, int streak ){
+	private static int verticalStreak(GameState state, int r, int c, int streak ){
 		int count = 0;
 		
 		int row;
@@ -163,7 +163,7 @@ public class MinimaxAB implements Constants {
 		return (count >= streak) ? 1 : 0 ;	
 	}
 	
-	private int horizonalStreak(GameState state, int r, int c, int streak ){
+	private static int horizonalStreak(GameState state, int r, int c, int streak ){
 		int count = 0;
 		
 		int col;
@@ -177,7 +177,7 @@ public class MinimaxAB implements Constants {
 		return (count >= streak) ? 1 : 0 ;	
 	}
 	
-	private int diagonalStreak(GameState state, int r, int c, int streak ){
+	private static int diagonalStreak(GameState state, int r, int c, int streak ){
 		int total = 0;
 		int count = 0;
 		
