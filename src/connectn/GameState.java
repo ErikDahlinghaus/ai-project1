@@ -55,7 +55,7 @@ public class GameState implements Constants {
 
 	public boolean playMove(int column, int type, char player)  throws Exception {
 		// Update game board, place piece in the proper column.
-		int i;
+		int i, row;
 		boolean isValid = true;
 		
 		logger.log("Attempting to play move... Column: %d Type: %d Player: %c",column, type, player);
@@ -65,13 +65,14 @@ public class GameState implements Constants {
 		switch(type){
 		
 		case DROP:
-			for( i=this.rows-1; i>=0; i-- ){
+			if( columnIsFull(column) )
+				return isValid = false;
+			for( row=this.rows-1; row>=0; row-- ){
 				if( this.board[0][column] != NO_PLAYER ){
-					isValid = false;
-					return isValid;
+					return isValid = false;
 				}
-				if( this.board[i][column] == NO_PLAYER ){
-					this.board[i][column] = player;
+				if( this.board[row][column] == NO_PLAYER ){
+					this.board[row][column] = player;
 					break;
 				}
 			}
@@ -82,20 +83,27 @@ public class GameState implements Constants {
 				for( i=this.rows-1; i>0; i-- ){
 					this.board[i][column] = this.board[i-1][column];
 				}
-				this.board[0][column] = NO_PLAYER;
+				this.board[this.rows-1][column] = NO_PLAYER;
 			} else {
-				isValid = false;
-				return isValid;
+				return isValid = false;
 			}
 			break;
 		
 		}
 		
 		if ( isValid ){
-			this.printBoard();
+//			this.printBoard();
 		}
 		
 		return isValid;
+	}
+	
+	public boolean columnIsFull(int column){
+		if( this.board[this.rows-1][column] == NO_PLAYER ){
+			return false;
+		} else {
+			return true;
+		}
 	}
 
 	

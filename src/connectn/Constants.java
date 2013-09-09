@@ -2,7 +2,7 @@ package connectn;
 
 public interface Constants {
 	
-	Logger logger = new Logger("output2.log");
+	Logger logger = new Logger();
 	
 	String PLAYER_NAME="edahling-x";
 	static final char NO_PLAYER = ' ';
@@ -16,7 +16,7 @@ public interface Constants {
 	 * Algorithm is num4inarow*w + num3 you get the point
 	 */
 
-	static final int [] WEIGHTS = { 1, 1, 1, 1, 1, 1 };
+	static final int [] WEIGHTS = { 500, 25, 10, 1, 1, 1 };
 	static final int WINS = 0;
 	static final int N_STREAK = 1;
 	static final int N_LESS_STREAK = 2;
@@ -24,5 +24,5 @@ public interface Constants {
 	static final int N_LESS_STREAK_THREATS = 4;
 	static final int WIN_THREATS = 5;
 	
-	int DEPTH = 3;
+	int DEPTH = 4;
 }

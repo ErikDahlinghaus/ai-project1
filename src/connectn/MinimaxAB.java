@@ -20,19 +20,20 @@ public class MinimaxAB implements Constants {
 		int col = 0;
 		int type = DROP;
 		
-		int highestValue = 0;
+		int highestValue = Integer.MIN_VALUE;
 		
 		for (col = 0; col < state.cols; col++) {
 			for (type = DROP; type <= POP; type++) {
 				GameState child = state.copy();
-				child.playMove(col,type,currentPlayer);
-				int value = alphaBetaPruning(child, 0, alpha, beta, oppositePlayer);
-				logger.log("Value from move %d %d : %d", col, type, value);
-				if ( value > highestValue ){
-					logger.log("Highest Value: %d Last Value: %d",highestValue, value);
-					// Not sure < >
-					this.bestMove = child.lastMove;
-					highestValue = value;
+				if( child.playMove(col,type,currentPlayer) ) {
+					int value = alphaBetaPruning(child, 0, alpha, beta, oppositePlayer);
+					logger.log("Value from move %d %d : %d", col, type, value);
+					if ( value > highestValue ){
+						logger.log("Highest Value: %d Last Value: %d",highestValue, value);
+						// Not sure < >
+						this.bestMove = child.lastMove;
+						highestValue = value;
+					}
 				}
 			}
 		}
@@ -41,7 +42,7 @@ public class MinimaxAB implements Constants {
 	}
 	
 	public int alphaBetaPruning(GameState state, int depth, int alpha, int beta, char currentPlayer) throws Exception {
-		if (depth == DEPTH) // Check for winning condition
+		if (depth == DEPTH || isWinCondition(state)) // Check for winning condition
 		{
 			int heur = heuristicValue(state, currentPlayer);
 				logger.log("Heuristic Value: %d",heur);
@@ -81,6 +82,16 @@ public class MinimaxAB implements Constants {
 		logger.log("We are getting to this unreachable code -- uhhhhhhhhh");
 		return 0; // Should be unreachable code
 	}
+	
+	public boolean isWinCondition(GameState state){
+		
+		boolean win = false;
+		
+		this.checkForStreak(state, PLAYER1, state.N);
+
+		return win;
+		
+	}
 
 
 	public int heuristicValue(GameState state, char player) throws IOException
@@ -100,18 +111,18 @@ public class MinimaxAB implements Constants {
 		
 		int value = 0;
 		
-		logger.log("0 Value of Heuristic: %d", value);
+//		logger.log("0 Value of Heuristic: %d", value);
 		
 		value += WEIGHTS[WINS] * checkForStreak(state, player, state.N);
-		logger.log("1 Value of Heuristic: %d", value);
+//		logger.log("1 Value of Heuristic: %d", value);
 		value += WEIGHTS[N_STREAK] * checkForStreak(state, player, state.N-1);
-		logger.log("2 Value of Heuristic: %d", value);
+//		logger.log("2 Value of Heuristic: %d", value);
 		value += WEIGHTS[N_LESS_STREAK] * checkForStreak(state, player, state.N-2);
-		logger.log("3 Value of Heuristic: %d", value);
+//		logger.log("3 Value of Heuristic: %d", value);
 		value -= WEIGHTS[N_LESS_STREAK_THREATS] * checkForStreak(state, oppositePlayer, state.N-2);		
-		logger.log("4 Value of Heuristic: %d", value);
+//		logger.log("4 Value of Heuristic: %d", value);
 		value -= WEIGHTS[N_STREAK_THREATS] * checkForStreak(state, oppositePlayer, state.N-1);
-		logger.log("5 Value of Heuristic: %d", value);
+//		logger.log("5 Value of Heuristic: %d", value);
 		value -= WEIGHTS[WIN_THREATS] * checkForStreak(state, oppositePlayer, state.N);
 		logger.log("6 Value of Heuristic: %d", value);
 
@@ -149,7 +160,7 @@ public class MinimaxAB implements Constants {
 				break;
 			}
 		}
-		return (count > streak) ? 1 : 0 ;	
+		return (count >= streak) ? 1 : 0 ;	
 	}
 	
 	private int horizonalStreak(GameState state, int r, int c, int streak ){
@@ -163,7 +174,7 @@ public class MinimaxAB implements Constants {
 				break;
 			}
 		}
-		return (count > streak) ? 1 : 0 ;	
+		return (count >= streak) ? 1 : 0 ;	
 	}
 	
 	private int diagonalStreak(GameState state, int r, int c, int streak ){
@@ -182,7 +193,7 @@ public class MinimaxAB implements Constants {
 				row++;
 			}
 		}
-		total += (count > streak) ? 1 : 0 ;	
+		total += (count >= streak) ? 1 : 0 ;	
 		
 		count = 0;
 		row = r;
@@ -197,7 +208,7 @@ public class MinimaxAB implements Constants {
 				row--;
 			}
 		}
-		total += (count > streak) ? 1 : 0 ;	
+		total += (count >= streak) ? 1 : 0 ;	
 
 		return total;		
 	}

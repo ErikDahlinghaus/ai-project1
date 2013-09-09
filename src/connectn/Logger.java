@@ -4,9 +4,18 @@ import java.io.*;
 
 public class Logger {
 	
+	boolean init = false;
+	
 	BufferedWriter bw;
 	
+	Logger(){}
+	
 	Logger(String fn){
+		this.init(fn);
+	}
+	
+	public void init(String fn){
+
 		File file = new File(fn);
 
 		// if file doesnt exists, then create it
@@ -27,6 +36,7 @@ public class Logger {
 			e.printStackTrace();
 		}
 		this.bw = new BufferedWriter(fw);
+		init = true;
 	}
 	
 	public void log(String mes) throws IOException{		 

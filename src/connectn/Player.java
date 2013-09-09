@@ -7,13 +7,24 @@ public class Player implements Constants {
 
     public static void main (String args[]) throws Exception {    	
     	
-    	logger.log("\n\nStarting...");
-    	
     	String player_name = PLAYER_NAME;
     	
     	try{
     		player_name = args[0];
     	} catch( Exception e ){}
+    	
+    	try{
+    		logger.init(args[1]);
+    	} catch( Exception e ){}
+    	
+    	if( !logger.init )
+    		logger.init("output.log");
+    	
+    	logger.log("\n\nStarting...");
+    	
+
+    	
+
     	
         int width, height, numToWin, playerNumber, timeLimit;
         
